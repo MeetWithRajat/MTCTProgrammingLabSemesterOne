@@ -253,7 +253,18 @@ void compareTwoList(){
 }
 
 void reverseList(){
-    // this function will reverse the list and save the address to start2
+    // this function will reverse the first list
+    struct Node* prev = NULL;
+    struct Node* current = start1;
+    struct Node* next = NULL;
+    while (current != NULL){
+        next = current -> next;     // Store the next node in 'next'
+        current -> next = prev;     // Reverse the link for the current node
+        prev = current;     // Move 'prev' and 'current' one step forward
+        current = next;
+    }
+    start1 = prev;      // Update the start1 to point to the new first node
+    printf("List reversed!");
 }
 
 void concatTwoList(){
