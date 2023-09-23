@@ -17,8 +17,7 @@ void createList(struct Node **start){
     printf("\nEnter the size of the list: ");
     scanf("%d", &n);
 
-    for (int i = 1; i <= n; i++)
-    {
+    for (int i = 1; i <= n; i++){
         struct Node *node = (struct Node *)malloc(sizeof(struct Node)); // dynamically allocated memory for a node
         printf("Enter the value for the %d no node: ", i);
         scanf("%d", &node -> data);
@@ -51,16 +50,14 @@ void printList(){
             printf("\nThe first list is:\n");
 
         ptr = start1;
-        while (ptr != NULL)
-        {
+        while (ptr != NULL){
             printf("%d ", ptr -> data);
             ptr = ptr -> next;
         }
         ptr = start2;
         if (ptr != NULL){   // if the 2nd list is also created at that moment
             printf("\nThe second list is:\n");
-            while (ptr != NULL)
-            {
+            while (ptr != NULL){
                 printf("%d ", ptr -> data);
                 ptr = ptr -> next;
             }   
