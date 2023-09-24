@@ -44,7 +44,7 @@ void printList() {
     // this function will print all the linked list
     struct Node *ptr;
     if (start1 == NULL && start2 == NULL)
-        printf("\nList not created yet, You may want to create first!");    
+        printf("\nList not created yet, You may want to create first!");
     else{
         if (start2 == NULL)
             printf("\nThe list is:\n");
@@ -330,12 +330,64 @@ void concatTwoList() {
     }
 }
 
+struct Node* merge(struct Node* list1, struct Node* list2) {
+    // function to merge two sorted lists
+    if (list1 == NULL) return list2;
+    if (list2 == NULL) return list1;
+
+    struct Node* result = NULL;
+
+    if (list1->data <= list2->data) {
+        result = list1;
+        result->next = merge(list1->next, list2);
+    } else {
+        result = list2;
+        result->next = merge(list1, list2->next);
+    }
+
+    return result;
+}
+
+void split(struct Node* source, struct Node** frontRef, struct Node** backRef) {
+    // function to split the list into two halves
+    struct Node* slow;
+    struct Node* fast;
+
+    if (source == NULL || source->next == NULL) {
+        *frontRef = source;
+        *backRef = NULL;
+    } else {
+        slow = source;
+        fast = source->next;
+
+        while (fast != NULL) {
+            fast = fast->next;
+            if (fast != NULL) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+
+        *frontRef = source;
+        *backRef = slow->next;
+        slow->next = NULL;
+    }
+}
+
 void sortList(struct Node **start) {
     // this function is for sort the list (uses merge sort)
-    int temp;
-    if (start != NULL) {
+    struct Node* head = *start;
+    struct Node* a;
+    struct Node* b;
 
-    }
+    if (head == NULL || head->next == NULL) return;
+
+    split(head, &a, &b);
+
+    sortList(&a);
+    sortList(&b);
+
+    *start = merge(a, b);
 }
 
 void mergeTwoList() {
@@ -356,8 +408,9 @@ void mergeTwoList() {
     }else{
         sortList(&start1);
         sortList(&start2);
-        printf("\nLists sorted first\n");
+        printf("\nLists sorted first!\n");
         printList();
+        printf("\n");
         if (start1 == NULL)
             start1 = start2;    // if the first list is empty, then point it to the second list
         else{
@@ -449,7 +502,12 @@ int main() {
             break;
 
         case 'm':
-            sortList();
+            sortList(&start1);
+            sortList(&start2);
+            if (start1 == NULL && start2 == NULL)
+                printf("\nList not created yet, You may want to create first!");
+            else
+                printf("\nList Sorted!");
             break;
 
         case 'n':
