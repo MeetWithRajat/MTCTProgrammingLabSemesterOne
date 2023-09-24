@@ -394,6 +394,6 @@ int main(){
             printf("\nWrong entered!, Please choose from the above options!");
             break;
         }
-    }while(choice != 'k' && choice != 'K');
+    }while (choice != 'k' && choice != 'K');
     return 0;
 }
