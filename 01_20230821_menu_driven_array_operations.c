@@ -5,9 +5,9 @@
 
 int n1 = 0, n2 = 0, *ptr1 = NULL, *ptr2 = NULL;
 
-void createFirstArray(){
+void createFirstArray() {
     // this function is for create the first array for n element
-    if (ptr1 != NULL){
+    if (ptr1 != NULL) {
         free(ptr1);
         n1 = 0;
     }
@@ -16,11 +16,11 @@ void createFirstArray(){
 
     ptr1 = (int *)malloc(n1 * sizeof(int)); // dynamically allocated memory for n1 element
 
-    for (int i = 0; i < n1; i++){
+    for (int i = 0; i < n1; i++) {
         printf("Enter the element for index %d: ", i);
         scanf("%d", &ptr1[i]);
     }
-    if (n1 <= 0){
+    if (n1 <= 0) {
         printf("Array not created!");
         n1 = 0;
     }
@@ -28,9 +28,9 @@ void createFirstArray(){
         printf("Array created!");
 }
 
-void createSecondArray(){
+void createSecondArray() {
     // this function is for create the second array for n element
-    if (ptr2 != NULL){
+    if (ptr2 != NULL) {
         free(ptr2);
         n2 = 0;
     }
@@ -39,11 +39,11 @@ void createSecondArray(){
 
     ptr2 = (int *)malloc(n2 * sizeof(int)); // dynamically allocated memory for n2 element
 
-    for (int i = 0; i < n2; i++){
+    for (int i = 0; i < n2; i++) {
         printf("Enter the element for index %d: ", i);
         scanf("%d", &ptr2[i]);
     }
-    if (n2 <= 0){
+    if (n2 <= 0) {
         printf("Array not created!");
         n2 = 0;
     }
@@ -51,7 +51,7 @@ void createSecondArray(){
         printf("Array created!");
 }
 
-void showArray(){
+void showArray() {
     // this function will print the array
     if (n1 == 0 && n2 == 0)
         printf("\nArray not created yet, you may want to create first!");
@@ -64,7 +64,7 @@ void showArray(){
         for (int i = 0; i < n1; i++)
             printf("%d ", ptr1[i]);
 
-        if (ptr2 != NULL){  // if the array is split at that moment
+        if (ptr2 != NULL) {  // if the array is split at that moment
             printf("\nThe second array is:\n");
             for (int i = 0; i < n2; i++)
                 printf("%d ", ptr2[i]);
@@ -72,7 +72,7 @@ void showArray(){
     }
 }
 
-void countArray(){
+void countArray() {
     // this function is for count & print the no of element present in the array
     if (ptr2 == NULL)
         printf("\n%d elements present in the array at this moment", n1);
@@ -82,18 +82,18 @@ void countArray(){
     }
 }
 
-void indexedElement(){
+void indexedElement() {
     // this function is for print the element for the given index
     int index, option;
     if (n1 == 0 && n2 == 0)
         printf("\nArray not created yet, you may want to create first!");
-    else if (ptr2 != NULL){
+    else if (ptr2 != NULL) {
         printf("\nArray split, choose source array. Press 1) 1st array else 2nd array: ");
         scanf("%d", &option);
         printf("Enter the index no: ");
         scanf("%d", &index);
 
-        if (option == 1){
+        if (option == 1) {
             if (index >= 0 && index < n1)
                 printf("The element in the index %d (1st array) is: %d", index, ptr1[index]);
             else
@@ -114,17 +114,17 @@ void indexedElement(){
     }
 }
 
-void insertElement(){
+void insertElement() {
     // this function is for insert an element to the given index
     int index, option;
-    if (ptr2 != NULL){
+    if (ptr2 != NULL) {
         printf("\nArray split, choose source array. Press 1) 1st array else 2nd array: ");
         scanf("%d", &option);
         printf("Enter the index no: ");
         scanf("%d", &index);
 
-        if (option != 1){
-            if (index >= 0 && index <= n2){
+        if (option != 1) {
+            if (index >= 0 && index <= n2) {
                 n2 += 1;
                 ptr2 = (int *)realloc(ptr2, n2 * sizeof(int));  // allocate one extra memory for 2nd array
 
@@ -142,7 +142,7 @@ void insertElement(){
         scanf("%d", &index);
     }
 
-    if (index >= 0 && index <= n1){
+    if (index >= 0 && index <= n1) {
         n1 += 1;
         ptr1 = (int *)realloc(ptr1, n1 * sizeof(int));  // allocate one extra memory for 1st array
 
@@ -155,11 +155,11 @@ void insertElement(){
         printf("Element can't be inserted at this index, Index must be between 0 to %d", n1);
 }
 
-int findElement(int *arr, int n, int ele){
+int findElement(int *arr, int n, int ele) {
     // this function will find the element from the given array and return index if not present return -1
     int i, index = -1;
-    for (i = 0; i < n; i++){
-        if (arr[i] == ele){
+    for (i = 0; i < n; i++) {
+        if (arr[i] == ele) {
             index = i;
             break;
         }
@@ -169,26 +169,26 @@ int findElement(int *arr, int n, int ele){
     return index;
 }
 
-void deleteElement(){
+void deleteElement() {
     // this function is for delete an element for the given value
     int element, option, value, index=-1;
-    if (n1 == 0 && n2 == 0){
+    if (n1 == 0 && n2 == 0) {
         printf("\nArray not created yet, you may want to create first!");
         return;
     }
-    else if (ptr2 != NULL){
+    else if (ptr2 != NULL) {
         printf("\nArray split, choose source array. Press 1) 1st array else 2nd array: ");
         scanf("%d", &option);
         printf("Enter the element to be deleted: ");
         scanf("%d", &element);
 
-        if (option != 1){
+        if (option != 1) {
             index = findElement(ptr2, n2, element);
-            if (index != -1){
+            if (index != -1) {
                 for (int i = index; i < n2 - 1; i++)    // element left shifting
                     ptr2[i] = ptr2[i + 1];
                 n2 -= 1;
-                if (n2 == 0){
+                if (n2 == 0) {
                     free(ptr2);
                     ptr2 = NULL;
                 }else
@@ -196,7 +196,7 @@ void deleteElement(){
                 printf("Element deleted!");
             }
             return;
-        }else if (n1 == 0){
+        }else if (n1 == 0) {
             printf("No element present in the 1st array, You may want to delete from the 2nd array!");
             return;
         }
@@ -206,11 +206,11 @@ void deleteElement(){
     }
 
     index = findElement(ptr1, n1, element);
-    if (index != -1){
+    if (index != -1) {
         for (int i = index; i < n1 - 1; i++)    // element left shifting
             ptr1[i] = ptr1[i + 1];
         n1 -= 1;
-        if (n1 == 0){
+        if (n1 == 0) {
             free(ptr1);
             ptr1 = NULL;
         }else
@@ -219,7 +219,7 @@ void deleteElement(){
     }
 }
 
-void splitArray(){
+void splitArray() {
     // the function is for split the array into two array
     int position;
     if (n1 == 0 && n2 == 0)
@@ -232,7 +232,7 @@ void splitArray(){
         printf("\nEnter the the position to be split: ");
         scanf("%d", &position);
 
-        if (position > 0 && position < n1){
+        if (position > 0 && position < n1) {
             n2 = n1 - position;
             ptr2 = (int *)malloc(n2 * sizeof(int)); // dynamically allocated memory for n2 element
 
@@ -248,14 +248,14 @@ void splitArray(){
     }
 }
 
-void mergeArray(){
+void mergeArray() {
     // the function is for merge the split array into one array
     int temp, option;
-    if (n1 == 0 && n2 == 0){
+    if (n1 == 0 && n2 == 0) {
         printf("\nArray not created yet, you may want to create first!");
         return;
     }
-    else if (n2 == 0 || ptr2 == NULL){
+    else if (n2 == 0 || ptr2 == NULL) {
         printf("\nArray not split yet, you may want to split first or create a new array!");
         printf("\nChoose a option. Press 1) Split array else Create new array: ");
         scanf("%d", &option);
@@ -281,7 +281,7 @@ void mergeArray(){
     }
 }
 
-void sortArray(){
+void sortArray() {
     // this function is for sort the array (uses bubble sort)
     int temp;
     if (n1 == 0 && n2 == 0)
@@ -289,7 +289,7 @@ void sortArray(){
     else{
         for (int i = 0; i < n1; i++)    // for 1st array
             for (int j = i + 1; j < n1; j++)
-                if (ptr1[j] < ptr1[i]){
+                if (ptr1[j] < ptr1[i]) {
                     temp = ptr1[i];
                     ptr1[i] = ptr1[j];
                     ptr1[j] = temp;
@@ -297,7 +297,7 @@ void sortArray(){
 
         for (int i = 0; i < n2; i++)    // for 2nd array
             for (int j = i + 1; j < n2; j++)
-                if (ptr2[j] < ptr2[i]){
+                if (ptr2[j] < ptr2[i]) {
                     temp = ptr2[i];
                     ptr2[i] = ptr2[j];
                     ptr2[j] = temp;
@@ -307,13 +307,13 @@ void sortArray(){
     }
 }
 
-void searchElement(){
+void searchElement() {
     // this function is for search the element from the array (uses linear search)
     int search, option, *source = ptr1, source_count = n1, i;
     if (n1 == 0 && n2 == 0)
         printf("\nArray not created yet, you may want to create first!");
     else{
-        if (ptr2 != NULL){
+        if (ptr2 != NULL) {
             printf("\nArray split, choose source array. Press 1) 1st array else 2nd array: ");
             scanf("%d", &option);
 
@@ -324,8 +324,8 @@ void searchElement(){
 
         printf("\nEnter the element to be searched: ");
         scanf("%d", &search);
-        for (i = 0; i < source_count; i++){
-            if (source[i] == search){
+        for (i = 0; i < source_count; i++) {
+            if (source[i] == search) {
                 printf("Element found at the index no %d", i);
                 break;
             }
@@ -335,7 +335,7 @@ void searchElement(){
     }     
 }
 
-int main(){
+int main() {
     char choice;
     int temp;
     printf("\n-------------------- Menu driven program [Array Operations] --------------------");
@@ -345,7 +345,7 @@ int main(){
         printf("Enter you choice: ");
         scanf(" %c", &choice);
 
-        switch (choice){
+        switch (choice) {
         case 'a':
             createFirstArray();
             break;
