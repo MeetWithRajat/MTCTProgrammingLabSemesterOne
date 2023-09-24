@@ -250,29 +250,80 @@ void deleteValueNode(){
 
 void compareTwoList(){
     // this function will compare two list and and print true or false
+    struct Node *ptr1 = start1, *ptr2 = start2;
+    int option;
+    if (start2 == NULL){
+        printf("\nSecond list not created yet, You may want to create first!");
+        printf("\nChoose a option. Press 1) Create 2nd list else Abort: ");
+        scanf("%d", &option);
+        if (option == 1){
+            createList(&start2);
+            printf("\n");
+            printList();
+            printf("\n");
+            compareTwoList();
+        }else
+            printf("\nAborted!");
+    }else{
+        if (start1 == NULL)
+            printf("\n0");
+        else{
+            while (ptr1 != NULL && ptr2 != NULL){
+                if (ptr1 -> data != ptr2 -> data)
+                    break;
+                ptr1 = ptr1 -> next;
+                ptr2 = ptr2 -> next;
+            }
+            if (ptr1 == NULL && ptr2 == NULL)
+                printf("\n1");
+            else
+                printf("\n0");
+        }
+    }
 }
 
 void reverseList(){
     // this function will reverse the first list
-    struct Node* prev = NULL;
+    struct Node* previous = NULL;
     struct Node* current = start1;
     struct Node* next = NULL;
     while (current != NULL){
-        next = current -> next;     // Store the next node in 'next'
-        current -> next = prev;     // Reverse the link for the current node
-        prev = current;     // Move 'prev' and 'current' one step forward
+        next = current -> next;     // store the next node in 'next'
+        current -> next = previous;     // reverse the link for the current node
+        previous = current;     // move 'previous' and 'current' one step forward
         current = next;
     }
-    start1 = prev;      // Update the start1 to point to the new first node
-    printf("List reversed!");
+    start1 = previous;      // update the start1 to point to the new first node
+    printf("\nList reversed!");
 }
 
 void concatTwoList(){
-    // this function will concat two list
-}
-
-void mergeTwoList(){
-    // this function will merge two sorted list (before and after)
+    // this function will concat two lists
+    struct Node *ptr = start1;
+    int option;
+    if (start2 == NULL){
+        printf("\nSecond list not created yet, You may want to create first!");
+        printf("\nChoose a option. Press 1) Create 2nd list else Abort: ");
+        scanf("%d", &option);
+        if (option == 1){
+            createList(&start2);
+            printf("\n");
+            printList();
+            printf("\n");
+            concatTwoList();
+        }else
+            printf("\nLists not concatenated!");
+    }else{
+        if (start1 == NULL)
+            start1 = start2;    // if the first list is empty, then point it to the second list
+        else{
+            while (ptr -> next != NULL)
+                ptr = ptr -> next;  // traversing upto last node of first list
+            ptr -> next = start2;   // concatenate the second list to the end of the first list
+        }
+        start2 = NULL;
+        printf("\nLists concatenated!");
+    }
 }
 
 void sortList(){
@@ -299,6 +350,10 @@ void sortList(){
 
         printf("\nList Sorted!");
     }
+}
+
+void mergeTwoList(){
+    // this function will merge two sorted list (before and after)
 }
 
 int main(){
@@ -376,6 +431,6 @@ int main(){
             printf("\nWrong entered!, Please choose from the above options!");
             break;
         }
-    }while(choice != 'n' && choice != 'n');
+    }while (choice != 'n' && choice != 'n');
     return 0;
 }
