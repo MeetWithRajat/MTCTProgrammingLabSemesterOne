@@ -4,7 +4,7 @@
 </div>
 This project is for programming in C given in programming lab semester 1 on MTCT
 
-Author & Owner: **Rajat Roy** Last Updated: **2023-09-23**
+Author & Owner: **Rajat Roy** Last Updated: **2023-09-24**
 
 ### ASSIGNMENT – 1
 Given Date: **2023-08-21**
